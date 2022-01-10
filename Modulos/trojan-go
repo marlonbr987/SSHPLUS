@@ -3,29 +3,28 @@
 #MIT License
 #Copyright (c) 2020 h31105
 
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
+#A permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia
+#deste software e arquivos de documentação associados (o "Software"), para lidar
+#no Software sem restrição, incluindo, sem limitação, os direitos
+#para usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e / ou vender
+#cópias do Software, e para permitir que as pessoas a quem o Software é
+#fornecido para fazê-lo, sujeito às seguintes condições:
+#O aviso de direitos autorais acima e este aviso de permissão devem ser incluídos em todos
+#cópias ou partes substanciais do Software.
 
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
-
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU
+#IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO ÀS GARANTIAS DE COMERCIALIZAÇÃO,
+#ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA E NÃO VIOLAÇÃO. EM NENHUMA HIPÓTESE O
+#AUTORES OU TITULARES DE DIREITOS AUTORAIS SÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANOS OU OUTROS
+#RESPONSABILIDADE, SEJA EM AÇÃO DE CONTRATO, DELITO OU DE OUTRA FORMA, DECORRENTE DE,
+#FORA DE OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO
 #SOFTWARE.
 
 #====================================================
-# System Request:Debian 9+/Ubuntu 18.04+/Centos 7+
-# Author: Miroku/h31105
-# Dscription: TLS-Shunt-Proxy&Trojan-Go&V2Ray Script
-# Official document:
+# Solicitação do sistema: Debian 9+/Ubuntu 18.04+/Centos 7+
+# Autor: Miroku/h31105
+# Descrição: TLS-Shunt-Proxy&Trojan-Go&V2Ray Script
+# Documento oficial:
 # https://www.v2ray.com/
 # https://github.com/p4gefau1t/trojan-go
 # https://github.com/liberal-boy/tls-shunt-proxy
@@ -61,7 +60,7 @@ shell_version="1.183"
 tsp_cfg_version="0.61.1"
 #install_mode="docker"
 upgrade_mode="none"
-github_branch="main"
+github_branch="master"
 version_cmp="/tmp/version_cmp.tmp"
 tsp_conf_dir="/etc/tls-shunt-proxy"
 trojan_conf_dir="/etc/trojan-go"
@@ -76,7 +75,7 @@ random_num=$((RANDOM % 3 + 7))
 #shellcheck disable=SC1091
 source '/etc/os-release'
 
-#从VERSION中提取发行版系统的英文名称
+#Extraia o nome em inglês do sistema de lançamento de VERSION
 VERSION=$(echo "${VERSION}" | awk -F "[()]" '{print $2}')
 
 check_system() {
@@ -592,7 +591,7 @@ install_docker() {
 }
 
 install_tsp() {
-    bash <(curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/main/dist/install.sh)
+    bash <(curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh)
     judge "Instalar TLS-Shunt-Proxy"
     chown -R tls-shunt-proxy:tls-shunt-proxy /etc/ssl/tls-shunt-proxy
     command -v setcap >/dev/null 2>&1 && setcap "cap_net_bind_service=+ep" /usr/local/bin/tls-shunt-proxy
@@ -824,7 +823,7 @@ upgrade_tsp() {
         case $update_confirm in
         [yY][eE][sS] | [yY])
             config_exist_check "${tsp_conf}"
-            bash <(curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/main/dist/install.sh)
+            bash <(curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh)
             judge "Atualização TLS-Shunt-Proxy"
             systemctl daemon-reload && systemctl reset-failed
             systemctl enable tls-shunt-proxy && systemctl restart tls-shunt-proxy
@@ -1280,7 +1279,7 @@ menu() {
         case $kernel_change in
         YES)
             [ -f "tcp.sh" ] && rm -rf ./tcp.sh
-            wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/main/tcpx.sh" && chmod +x tcpx.sh && ./tcpx.sh
+            wget -N --no-check-certificate "https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh" && chmod +x tcpx.sh && ./tcpx.sh
             ;;
         *)
             echo -e "${RedBG} Deixe-me pensar de novo ${Font}"
